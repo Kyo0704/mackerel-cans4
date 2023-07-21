@@ -1,0 +1,23 @@
+.leaflet_table {
+  position: relative;
+  border-collapse: collapse;
+  text-align: center;
+  width: 95%;
+  max-width: 1000px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.0rem;
+  white-space: nowrap;
+
+  ::-webkit-scrollbar{
+    display: none;
+  }
+  td{
+    padding: 3px;
+  }
+  th{
+    background-color: rgb(98, 98, 98);
+    color: #FFFFFF;
+  }
+}
