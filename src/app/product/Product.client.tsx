@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { ProductType } from '../../type';
+import { ProductType } from '../../../type';
 
 export default function Product() {
     const [products, setProducts] = useState<ProductType[]>([]);

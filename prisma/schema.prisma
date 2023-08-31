@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uid    String @id @db.VarChar(255)
+  uname   String @db.VarChar(255)
+  registered_Store Registered_Stores[]
+}
+
+model Classification {
+  cid    String @id @db.VarChar(255)
+  cname    String @db.VarChar(255)
+  product     Product[]
+  classification_state Classification_state[]
+}
+
+model Product {
+  pid         String @id @db.VarChar(255) @default(cuid())
+  pname       String @db.VarChar(255)
+  price       Int
+  image       String @db.VarChar(255)
+  cid         String @db.VarChar(255)
+  production_area String? @db.VarChar(255)
+  volume      String?  @db.VarChar(255)
+  expiry_date DateTime?
+  discounts   Discount[]
+  Classification Classification @relation(fields: [cid], references: [cid])
+}
+
+model Store {
+  sid         String @id @db.VarChar(255)
+  sname       String @db.VarChar(255)
+  discounts   Discount[]
+  registered_Store Registered_Stores[]
+  employees Employee[]
+}
+
+model State {
+  stid    String @id @db.VarChar(255)
+  stname    String @db.VarChar(255)
+  discounts   Discount[]
+  classification_state Classification_state[]
+}
+
+model Classification_state {
+  stid        String @db.VarChar(255)
+  cid         String @db.VarChar(255)
+  state State @relation(fields: [stid], references: [stid])
+  Classification Classification @relation(fields: [cid], references: [cid])
+  @@id([stid, cid])
+}
+
+model Discount {
+  pid         String  @db.VarChar(255)
+  sid         String  @db.VarChar(255)
+  dprice      Int
+  quantity    Int
+  stid        String  @db.VarChar(255)
+  product     Product @relation(fields: [pid], references: [pid])
+  store       Store   @relation(fields: [sid], references: [sid])
+  state       State   @relation(fields: [stid], references: [stid])
+  @@id([pid, sid])
+}
+
+model Registered_Stores {
+  uid    String @db.VarChar(255)
+  sid    String @db.VarChar(255)
+  user   User   @relation(fields: [uid], references: [uid])
+  store  Store  @relation(fields: [sid], references: [sid])
+  @@id([uid, sid])
+}
+
+model Employee {
+  eid String @id @db.VarChar(255)
+  ename String @db.VarChar(255)
+  sid String @db.VarChar(255)
+  jid String @db.VarChar(255)
+  pass String? @db.VarChar(255)
+  store Store @relation(fields: [sid], references: [sid])
+  job Job @relation(fields: [jid], references: [jid])
+}
+
+model Job {
+  jid    String @id @db.VarChar(255)
+  jname  String @db.VarChar(255)
+  employees Employee[]
+}
