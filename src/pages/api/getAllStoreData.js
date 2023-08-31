@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   const connection = mysql.createConnection(db_setting)
   try {
     // データを挿入するためのクエリを作成
-    const query = `select sname, sid from store`;
+    const query = `select sname, sid from Store`;
     // データベースにデータを挿入
     connection.query(query, async (error, results, fields) => {
       if (error) {
