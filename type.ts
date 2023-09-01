@@ -10,6 +10,10 @@ export type ProductType = {
     production_area: string | null;
     volume: string | null;
     discounts: DiscountType[];
+    // 既存のプロパティ
+    originalPrice?: number;    // 値引き前の金額
+    discountedPrice?: number;  // 値引き後の金額
+    discountAmount?: number;   // 値引き額
     // 他の属性も必要に応じてここに追加します。
 };
 
