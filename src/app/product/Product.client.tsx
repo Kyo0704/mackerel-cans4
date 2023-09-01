@@ -47,7 +47,7 @@ export default function Product() {
                 <p className="mb-4 text-2xl font-semibold text-gray-800">￥: {selectedProduct.price}円</p>
                 <p className="mb-4 text-lg text-gray-600">産地: {selectedProduct.production_area}</p>
                 <p className="mb-4 text-lg text-gray-600">容量: {selectedProduct.volume}</p>
-                <p className="mb-4 text-lg text-gray-600">状態: {selectedProduct.discounts[0]?.state?.stname || '不明'}</p>
+                <p className="mb-4 text-lg text-gray-600">状態: {selectedProduct.discounts[0]?.state[0]?.stname || '不明'}</p>
                 <div className="mb-4 text-lg text-gray-600 flex items-center">
                     <span className="mr-2">定価:</span>
                     <span className="line-through mr-4">{selectedProduct.originalPrice}円</span>
@@ -78,7 +78,7 @@ export default function Product() {
                         <div className="flex-1 p-4">
                             <h3 className="font-semibold text-gray-900 text-lg">{product.pname}</h3>
                             <p className="text-gray-600">￥: {product.price}円</p>
-                            <p className="text-gray-400">状態: {product.discounts[0]?.state?.stname || '不明'}</p>
+                            <p className="text-gray-400">状態: {product.discounts[0]?.state[0]?.stname || '不明'}</p>
                         </div>
                         <div className="p-4 bg-gray-100 border-t border-gray-200">
                             <button onClick={() => displayDetails(product)} className="text-lg font-bold text-purple-600 hover:text-purple-700">

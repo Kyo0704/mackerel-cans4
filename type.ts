@@ -22,5 +22,11 @@ export type DiscountType = {
     sid: string;
     stid: string;
     cid: string;
+    state: state[];
     // 他の属性も必要に応じて追加する
 };
+
+export type state = {
+    stid: string;
+    stname: string;
+}
